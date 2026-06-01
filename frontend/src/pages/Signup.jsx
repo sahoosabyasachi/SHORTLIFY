@@ -1,0 +1,83 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setEmail("");
+    setPassword("");
+  };
+
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex items-center justify-center bg-(--bg) min-h-screen ">
+      <div className="bg-(--muted) w-auto md:w-90 h-100 rounded-xl flex flex-col gap-4 items-center justify-center">
+        <form
+          action=""
+          className="flex flex-col gap-5 w-[98%] items-center"
+          onSubmit={submitHandler}
+        >
+          <h1 className="text-3xl text-(--text) text-start inline  w-[80%]">
+            Sign Up
+          </h1>
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Enter your name"
+            required
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            className="bg-(--text) w-[80%] p-2 rounded border-none outline-none"
+          />
+          <input
+            type="email"
+            name=""
+            id=""
+            placeholder="Enter your email"
+            required
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            className="bg-(--text) w-[80%] p-2 rounded border-none outline-none"
+          />
+          <input
+            type="password"
+            name=""
+            id=""
+            placeholder="Enter your password"
+            required
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            className="bg-(--text) w-[80%] p-2 rounded border-none outline-none"
+          />
+          <button className="bg-(--primary) border border-transparent text-(--text) cursor-pointer px-auto  w-[80%] py-2 hover:bg-(--secondary) transition-all duration-200 hover:border-(--primary) rounded-xl">
+            Sign Up
+          </button>
+        </form>
+        <p className="text-black px-4 md:p-0">
+          Already have an account.{" "}
+          <span
+            className="text-(--primary) underline cursor-pointer "
+            onClick={() => {
+              navigate("/signin");
+            }}
+          >
+            Login
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Signup;

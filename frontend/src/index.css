@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-md: 970px;
+}
+
+:root {
+  /* Brand */
+  --primary: #4F46E5;     /* Indigo */
+  --secondary: #7C3AED;   /* Purple */
+  --accent: #06B6D4;      /* Cyan */
+
+  --starter : #6366F1;   /* Indigo */
+  --basic   : #8B5CF6;   /* Purple */
+  --pro     : #EC4899;   /* Pink */
+
+  /* Backgrounds */
+  --bg: #0F172A;          /* Main background */
+  --surface: #111827;     /* Cards / navbar */
+  --surface-2: #1E293B;   /* Hover / secondary surfaces */
+
+  /* Text */
+  --text: #F8FAFC;        /* Main text */
+  --muted: #94A3B8;       /* Secondary text */
+  --text-primary: #FFFFFF;     /* Main headings */
+  --text-secondary: #E2E8F0;   /* Sub headings */
+  --text-muted: #CBD5E1;       /* Descriptions */
+  --text-soft: #94A3B8;        /* Small labels */
+  --text-accent: #C084FC;      /* Highlight text */
+  --text-success: #4ADE80;     /* Success stats */
+  --text-warning: #FBBF24;     /* Warnings */
+  --text-link: #60A5FA;        /* Links */
+
+  /* Status */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Border */
+  --border: #334155;
+
+  --gradient: linear-gradient(
+    to bottom,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
+
+}
+
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
