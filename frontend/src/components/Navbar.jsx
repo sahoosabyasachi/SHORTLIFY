@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [open, setOpen] = useState(false);
+  const user = props.user;
+
   const navigate = useNavigate();
 
   const handleMenu = () => {
     setOpen(!open);
+  };
+
+  const handleLogOut = async (req, res) => {
+    axios.post(`${apiUrl}/logout`, {}, { withCredentials: true });
+
+    props.setUser(null);
+    navigate("/signin");
   };
 
   return (
@@ -44,24 +55,47 @@ const Navbar = () => {
           Term
         </Link>
       </div>
-      <div className="hidden md:flex gap-8">
-        <button
-          className="bg-none border-none text-(--muted) cursor-pointer hover:text-(--text) transition-all duration-200"
-          onClick={() => {
-            navigate("/signin");
-          }}
-        >
-          Sign In
-        </button>
-        <button
-          className="bg-(--secondary) px-5 py-2 rounded-xl text-(--text) hover:bg-(--primary) transition-all duration-200"
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          Start Free
-        </button>
-      </div>
+      {user ? (
+        <div className="relative group md:flex hidden">
+          <div className="bg-(--primary)  h-10 w-10 flex items-center justify-center rounded-full cursor-pointer">
+            <p className="text-(--text) text-2xl font-semibold">
+              {user.userName.charAt(0).toUpperCase()}
+            </p>
+          </div>
+          <div className="text-(--text) bg-(--secondary) rounded min-w-50  top-10 right-0 z-200 absolute px-2 cursor-pointer hidden group-hover:block  py-2 ">
+            <div>
+              <p className="hover:scale-101 transition-all duration-200">
+                Hello {user.userName} !
+              </p>
+              <p
+                onClick={handleLogOut}
+                className="hover:scale-101 transition-all duration-200"
+              >
+                Log Out
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="hidden md:flex gap-8">
+          <button
+            className="bg-none border-none text-(--muted) cursor-pointer hover:text-(--text) transition-all duration-200"
+            onClick={() => {
+              navigate("/signin");
+            }}
+          >
+            Sign In
+          </button>
+          <button
+            className="bg-(--secondary) px-5 py-2 rounded-xl text-(--text) hover:bg-(--primary) transition-all duration-200"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            Start Free
+          </button>
+        </div>
+      )}
       <div className="md:hidden ">
         <button className="cursor-pointer" onClick={handleMenu}>
           {open ? (

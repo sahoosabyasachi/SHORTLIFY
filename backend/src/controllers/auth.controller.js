@@ -11,7 +11,7 @@ export const registerUser = async (req, res) => {
     });
 
     if (isUserAlreadyExists) {
-      res.status(409).json({ message: "User already exists" });
+      return res.status(409).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,7 +48,7 @@ export const logInUser = async (req, res) => {
     const user = await userModel.findOne({ $or: [{ userName }, { email }] });
 
     if (!user) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "Invalid credentials",
       });
     }
@@ -56,7 +56,7 @@ export const logInUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "Invalid credentials",
       });
     }

@@ -1,17 +1,40 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
+import axios from "axios";
 
-const Signup = () => {
+const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const submitHandler = (e) => {
+  const [userName, setUserName] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setError("");
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/register`,
+        {
+          userName,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      props.setUser(response.data.user);
+      navigate("/");
+    } catch (error) {
+      setError(error.response?.data?.message || "Something went wrong");
+    }
+    setUserName("");
     setEmail("");
     setPassword("");
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className="flex items-center justify-center bg-(--bg) min-h-screen ">
@@ -24,15 +47,16 @@ const Signup = () => {
           <h1 className="text-3xl text-(--text) text-start inline  w-[80%]">
             Sign Up
           </h1>
+          {error && <p className="text-(--danger) w-[80%] text-sm">{error}</p>}
           <input
             type="text"
             name=""
             id=""
-            placeholder="Enter your name"
+            placeholder="Enter your username"
             required
-            value={name}
+            value={userName}
             onChange={(e) => {
-              setName(e.target.value);
+              setUserName(e.target.value);
             }}
             className="bg-(--text) w-[80%] p-2 rounded border-none outline-none"
           />

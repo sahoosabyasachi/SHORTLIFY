@@ -5,10 +5,10 @@ import Pricing from "./Pricing";
 import Contact from "./Contact"
 import Footer from "./Footer";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div id="home">
-      <Navbar className="sticky"/>
+      <Navbar className="sticky" user={props.user} setUser={props.setUser} />
       <Header />
       <Pricing />
       <Contact />

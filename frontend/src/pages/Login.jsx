@@ -1,11 +1,34 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submitHandler = (e) => {
+  const [error, setError] = useState("");
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setError("");
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      props.setUser(response.data.user);
+      navigate("/");
+    } catch (error) {
+      setError(error.response?.data?.message || "Something went wrong");
+    }
+
     setEmail("");
     setPassword("");
   };
