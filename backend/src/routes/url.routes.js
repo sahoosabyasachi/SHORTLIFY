@@ -8,6 +8,6 @@ const router = express.Router();
 router.post("/shorten", isUserAuthenticate, urlShortener);
 router.get("/url", isUserAuthenticate, fetchUser);
 
-router.get("/:shortId", isUserAuthenticate, urlRedirection);
+router.get("/:shortId",  urlRedirection);
 
 export default router;

@@ -7,11 +7,15 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", logInUser);
 router.post("/logout", (req, res) => {
-  res.clearCookie("token");
-  
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+
   return res.status(200).json({
-    message:"Logged out successfully"
-  })
+    message: "Logged out successfully",
+  });
 });
 router.get("/user", isUserAuthenticate, (req, res) => {
   const user = req.user;
