@@ -73,7 +73,7 @@ const Header = (props) => {
             <p className="text-xl font-bold text-(--text)">Shorten URLs</p>
           </div>
         </button>
-        {props.user && (
+        {!props.user && (
           <button
             className="col-span-2 py-3 rounded-xl bg-(--primary) text-(--text) hover:scale-105 transition-all duration-200"
             onClick={() => navigate("/signup")}
