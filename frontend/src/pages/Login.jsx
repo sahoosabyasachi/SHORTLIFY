@@ -46,6 +46,7 @@ const Login = (props) => {
           <h1 className="text-3xl text-(--text) text-start inline  w-[80%]">
             Login
           </h1>
+          {error && <p className="text-(--danger) w-[80%] text-sm">{error}</p>}
           <input
             type="email"
             name=""
