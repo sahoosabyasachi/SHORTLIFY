@@ -9,7 +9,7 @@ const Home = (props) => {
   return (
     <div id="home">
       <Navbar className="sticky" user={props.user} setUser={props.setUser} />
-      <Header />
+      <Header user={props.user} />
       <Pricing />
       <Contact />
       <Footer />
