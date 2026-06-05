@@ -64,7 +64,6 @@ const Header = (props) => {
             <p className="text-xl font-bold text-(--text)">Analytics</p>
           </div>
         </button>
-
         <button
           className="h-40 rounded-xl bg-(--primary) flex items-center justify-center hover:scale-105 transition-all duration-200"
           onClick={() => (props.user ? navigate("/urls") : navigate("/signin"))}
@@ -74,13 +73,14 @@ const Header = (props) => {
             <p className="text-xl font-bold text-(--text)">Shorten URLs</p>
           </div>
         </button>
-
-        <button
-          className="col-span-2 py-3 rounded-xl bg-(--primary) text-(--text) hover:scale-105 transition-all duration-200"
-          onClick={() => navigate("/signup")}
-        >
-          Start Free
-        </button>
+        {props.user && (
+          <button
+            className="col-span-2 py-3 rounded-xl bg-(--primary) text-(--text) hover:scale-105 transition-all duration-200"
+            onClick={() => navigate("/signup")}
+          >
+            Start Free
+          </button>
+        )}
       </div>
     </div>
   );
